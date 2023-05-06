@@ -1,7 +1,8 @@
 <template>
   <main>
     <template v-for="(comment, i) in comments" :key="`item-${i}`">
-      <CommentCard v-bind="i" :name="comment.user.username" :photo="comment.user.image.png" :comment="comment.content" />
+      <CommentCard v-bind="i" :name="comment.user.username" :photo="comment.user.image.png" :comment="comment.content"
+        :createdAt="comment.createdAt" :score="comment.score" />
     </template>
     <div class="attribution">
       Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
@@ -26,12 +27,8 @@ export default {
   },
   data: function () {
     return {
-      comments: data.comments,
-      imgPath: './images/avatars/image-amyrobson.png'
+      comments: data.comments
     }
-  },
-  beforeMount() {
-    window.console.log(data.comments)
   }
 }
 </script>
@@ -53,7 +50,14 @@ html {
 
 body {
   margin: 0;
-  background-color: hsl(185, 41%, 84%);
+  background-color: hsl(228, 33%, 97%);
+}
+
+main{
+  max-width: 50rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .attribution {
