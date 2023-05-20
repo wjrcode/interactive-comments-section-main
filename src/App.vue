@@ -1,8 +1,25 @@
 <template>
   <main>
     <template v-for="(comment, i) in comments" :key="`item-${i}`">
-      <CommentCard v-bind="i" :name="comment.user.username" :photo="comment.user.image.png" :comment="comment.content"
-        :createdAt="comment.createdAt" :score="comment.score" />
+      <div>
+        <CommentCard v-bind="i" :name="comment.user.username" :photo="comment.user.image.png" :comment="comment.content"
+          :createdAt="comment.createdAt" :score="comment.score" />
+
+        <div class="replies">
+          <div class="barra"></div>
+          <div>
+          <template v-for="(reply, j) in comment.replies" :key="`item-${j}`">
+
+            <CommentCard v-bind="j" :name="reply.user.username" :photo="reply.user.image.png" :comment="reply.content"
+              :createdAt="reply.createdAt" :score="reply.score" />
+          </template>
+        </div>
+
+        </div>
+
+
+      </div>
+
     </template>
     <div class="attribution">
       Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
@@ -53,7 +70,7 @@ body {
   background-color: hsl(228, 33%, 97%);
 }
 
-main{
+main {
   max-width: 50rem;
   display: flex;
   flex-direction: column;
@@ -77,5 +94,18 @@ main{
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+.replies {
+  margin-left: 3rem;
+  margin-top: 1rem;
+  display: flex;
+}
+
+.barra{
+  width: 0.5rem;
+  background-color: rgb(7, 85, 124);
+  margin-top: 4px;
+  margin-right: 3rem;
 }
 </style>

@@ -1,15 +1,15 @@
 <template>
   <div class="card">
     <div class="card__vote-button">
-      <img src="../images/icon-plus.svg" class="card__icon"/>
-      {{ score  }}
-      <img src="../images/icon-minus.svg" class="card__icon"/>
+      <img src="../images/icon-plus.svg" class="card__icon" />
+      {{ score }}
+      <img src="../images/icon-minus.svg" class="card__icon" />
     </div>
     <div class="card__content">
       <div class="card__header">
         <div class="card__details">
           <div class="card__profile-photo">
-            <img :src="photo"/>
+            <img :src="photo" />
           </div>
           <div class="card__user-name">
             {{ name }}
@@ -19,7 +19,7 @@
           </div>
         </div>
         <div class="card__reply-button">
-          <img src="../images/icon-reply.svg"/>
+          <img src="../images/icon-reply.svg" />
           Reply
         </div>
       </div>
@@ -34,24 +34,17 @@
 export default {
   name: 'CommentCard',
   props: {
-    photo: {type: String},
+    photo: String,
     name: String,
     createdAt: String,
     comment: String,
     score: Number
   },
-  computed:{
-    pic(){
-      return require(this.photo)
-    }
-  }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
-.card{
+.card {
   display: flex;
   background-color: white;
   padding: 2rem;
@@ -59,44 +52,45 @@ export default {
   gap: 1rem;
 }
 
-.card__vote-button{
+.card__vote-button {
   background-color: hsl(228, 33%, 97%);
   padding: 1rem;
   border-radius: 0.5rem;
-  color:hsl(238, 40%, 52%);
+  color: hsl(238, 40%, 52%);
   font-weight: bold;
   display: flex;
-  gap: 1rem;
   flex-direction: column;
+  justify-content: space-between;
+  max-height: 5.6rem;
 }
 
-.card__icon{
+.card__icon {
   width: 1rem;
 }
-.card__header{
+
+.card__header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.card__details{
+.card__details {
   display: flex;
   align-items: center;
   gap: 1rem
 }
 
-.card__user-name{
+.card__user-name {
   font-weight: bold;
 }
 
-.card__reply-button{
-  color:hsl(238, 40%, 52%);
+.card__reply-button {
+  color: hsl(238, 40%, 52%);
   font-weight: bold;
 }
 
-.card__comment{
+.card__comment {
   margin-top: 1rem;
   text-align: left;
 }
-
 </style>
