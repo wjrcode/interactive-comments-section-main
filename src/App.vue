@@ -4,23 +4,19 @@
       <div>
         <CommentCard v-bind="i" :name="comment.user.username" :photo="comment.user.image.png" :comment="comment.content"
           :createdAt="comment.createdAt" :score="comment.score" />
-
         <div class="replies">
           <div class="barra"></div>
           <div>
-          <template v-for="(reply, j) in comment.replies" :key="`item-${j}`">
-
-            <CommentCard v-bind="j" :name="reply.user.username" :photo="reply.user.image.png" :comment="reply.content"
-              :createdAt="reply.createdAt" :score="reply.score" />
-          </template>
+            <template v-for="(reply, j) in comment.replies" :key="`item-${j}`">
+              <CommentCard v-bind="j" :name="reply.user.username" :photo="reply.user.image.png" :comment="reply.content"
+                :createdAt="reply.createdAt" :score="reply.score" />
+            </template>
+          </div>
         </div>
-
-        </div>
-
-
       </div>
-
+      
     </template>
+    <CommentInput :photo="currentUser.image.png" :name="currentUser.username" @sendComment="sendComment"/>
     <div class="attribution">
       Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
       Coded by <a href="#">Your Name Here</a>.
@@ -31,11 +27,13 @@
 <script>
 import CommentCard from './components/CommentCard.vue';
 import data from './data/data.json'
+import CommentInput from './components/CommentInput.vue';
 
 export default {
   name: 'App',
   components: {
-    CommentCard
+    CommentCard,
+    CommentInput
   },
   computed: {
     pic() {
@@ -44,7 +42,15 @@ export default {
   },
   data: function () {
     return {
-      comments: data.comments
+      comments: data.comments,
+      currentUser: data.currentUser
+    }
+  },
+  methods:{
+    sendComment(comment){
+      this.comments.push(comment)
+      window.console.log(comment)
+      window.console.log(this.comments)
     }
   }
 }
@@ -102,9 +108,9 @@ main {
   display: flex;
 }
 
-.barra{
+.barra {
   width: 0.5rem;
-  background-color: rgb(7, 85, 124);
+  background-color: hsl(223, 19%, 93%);
   margin-top: 4px;
   margin-right: 3rem;
 }

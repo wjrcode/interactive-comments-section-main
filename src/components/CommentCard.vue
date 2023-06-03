@@ -64,6 +64,11 @@ export default {
   max-height: 5.6rem;
 }
 
+.card__profile-photo img{
+    width: 30px;
+    aspect-ratio: 1/1;
+}
+
 .card__icon {
   width: 1rem;
 }
