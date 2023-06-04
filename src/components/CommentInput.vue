@@ -23,7 +23,7 @@
                 <div class="card__profile-photo">
                     <img :src="photo" />
                 </div>
-                <input class="card__input" v-model="newComment" placeholder="Add a comment..." />
+                <textarea class="card__input" v-model="newComment" placeholder="Add a comment..." rows="3" />
                 <button class="card__button" @click="sendComment()">send</button>
             </div>
 
@@ -48,18 +48,23 @@ export default {
     },
     methods: {
         sendComment() {
-            const comment = {
-                user: {
-                    image: {
-                        png: this.photo
+            if (this.newComment) {
+                const comment = {
+                    user: {
+                        image: {
+                            png: this.photo
+                        },
+                        username: this.name
                     },
-                    username: this.name
-                },
-                content: this.newComment,
-                score: 0,
-                createdAt: this.createdAt,
+                    content: this.newComment,
+                    score: 0,
+                    createdAt: '1 second ago',
+                    id: 7
+                }
+                this.$emit('sendComment', comment)
+
+                this.newComment = ''
             }
-            this.$emit('sendComment', comment )
         }
     }
 }
@@ -131,6 +136,7 @@ export default {
     border: solid 1px hsl(223, 19%, 93%);
     padding: 1rem;
     outline: none;
+    resize: none;
 }
 
 .card__input:focus {
@@ -145,6 +151,12 @@ export default {
     font-weight: bold;
     text-transform: uppercase;
     width: 7rem;
+    align-self: start;
+    padding: 1rem;
+}
+
+.card__button:hover {
+    background-color: hsla(238, 40%, 52%, 0.7);
 }
 </style>
   
